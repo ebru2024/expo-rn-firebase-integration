@@ -1,50 +1,127 @@
-# Welcome to your Expo app 👋
+# Expo React Native Firebase Integration
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native project using Expo and Firebase integration with authentication capabilities.
 
-## Get started
+## 🚀 Features
 
-1. Install dependencies
+- Firebase Authentication
+- Expo Router for navigation
+- iOS and Android support
+- TypeScript support
 
+## 📋 Prerequisites
+
+- Node.js (v14 or higher)
+- Expo CLI
+- Firebase account
+- Xcode (for iOS development)
+- Android Studio (for Android development)
+
+## 🛠️ Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <your-repo-url>
+   cd expo-rn-firebase-integration
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
+   expo install @react-native-firebase/app @react-native-firebase/auth expo-build-properties
    ```
 
-2. Start the app
+## ⚙️ Configuration
+
+1. Configure `app.json` with required plugins:
+
+   ```json
+   {
+     "plugins": [
+       "expo-router",
+       "@react-native-firebase/app",
+       "@react-native-firebase/auth",
+       [
+         "expo-build-properties",
+         {
+           "ios": {
+             "useFrameworks": "static"
+           }
+         }
+       ]
+     ]
+   }
+   ```
+
+2. Firebase Setup:
+
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project or select existing one
+   - Add iOS and Android apps to your Firebase project
+   - Download configuration files:
+     - `google-services.json` for Android
+     - `GoogleService-Info.plist` for iOS
+   - Place these files in the root directory of your project
+
+3. Update `app.json` with your app configuration:
+   ```json
+   {
+     "ios": {
+       "supportsTablet": true,
+       "bundleIdentifier": "your.bundle.identifier",
+       "googleServicesFile": "./GoogleService-Info.plist"
+     },
+     "android": {
+       "package": "your.package.name",
+       "googleServicesFile": "./google-services.json"
+     }
+   }
+   ```
+
+## 🏃‍♂️ Running the App
+
+1. Generate native code:
 
    ```bash
-    npx expo start
+   expo prebuild
    ```
 
-In the output, you'll find options to open the app in a
+2. Run on iOS:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   npm run ios
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+3. Run on Android:
+   ```bash
+   npm run android
+   ```
 
-## Get a fresh project
+## 📝 Important Notes
 
-When you're ready, run:
+- Add the following files to `.gitignore`:
+  ```
+  google-services.json
+  GoogleService-Info.plist
+  ```
 
-```bash
-npm run reset-project
-```
+## 🔒 Security
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Never commit Firebase configuration files to version control
+- Keep your Firebase API keys and secrets secure
+- Follow Firebase security best practices
 
-## Learn more
+## 📚 Additional Resources
 
-To learn more about developing your project with Expo, look at the following resources:
+- [Expo Documentation](https://docs.expo.dev)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [React Native Firebase Documentation](https://rnfirebase.io)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🤝 Contributing
 
-## Join the community
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Join our community of developers creating universal apps.
+## 📄 License
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is licensed under the MIT License - see the LICENSE file for details.

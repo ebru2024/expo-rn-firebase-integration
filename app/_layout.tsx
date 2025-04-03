@@ -5,9 +5,12 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { getAuth, signInAnonymously } from '@react-native-firebase/auth';
+import { getApp } from '@react-native-firebase/app';
 
+const app = getApp();
+export const auth = getAuth(app);
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -23,9 +26,24 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  const signIn = async () => {
+    try {
+      await signInAnonymously(auth);
+      console.log('Signed in anonymously');
+    } catch (error) {
+      console.error('Error signing in anonymously:', error);
+    }
+  };
+
+  useEffect(() => {
+    signIn();
+  }, []);
+
   if (!loaded) {
     return null;
   }
+
+
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
